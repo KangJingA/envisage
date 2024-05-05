@@ -15,7 +15,7 @@ export async function createUser(user: CreateUserParams) {
         await getConnection();
 
         const newUser = await User.create(user);
-
+        console.log(`${user.username} created`)
         return JSON.parse(JSON.stringify(newUser));
     } catch (error) {
         handleError(error);
@@ -47,7 +47,7 @@ export async function updateUser(clerkId: string, user: UpdateUserParams) {
         });
 
         if (!updatedUser) throw new Error("User update failed");
-
+        console.log(`${user.username} updated`)
         return JSON.parse(JSON.stringify(updatedUser));
     } catch (error) {
         handleError(error);
@@ -69,7 +69,7 @@ export async function deleteUser(clerkId: string) {
         // Delete user
         const deletedUser = await User.findByIdAndDelete(userToDelete._id);
         revalidatePath("/");
-
+        console.log("user deleted")
         return deletedUser ? JSON.parse(JSON.stringify(deletedUser)) : null;
     } catch (error) {
         handleError(error);
