@@ -26,8 +26,12 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import { updateCredits } from '@/lib/actions/user.actions'
+
+// shared components
 import MediaUploader from './MediaUploader'
+import TransformedImage from './TransformedImage'
+// actions
+import { updateCredits } from '@/lib/actions/user.actions'
 
 export const formSchema = z.object({
     title: z.string(),
@@ -102,7 +106,6 @@ const TransformationForm = ({ action, data = null, userId, type, creditBalance, 
         startTransition(async () => {
             // await updateCredits(userId, creditFee)
         })
-
     }
 
     return (
@@ -204,6 +207,15 @@ const TransformationForm = ({ action, data = null, userId, type, creditBalance, 
                                 type={type}
                             />
                         )}
+                    />
+
+                    <TransformedImage 
+                        image={image}
+                        type={type}
+                        title={form.getValues().title}
+                        isTransforming={isTransforming}
+                        setIsTransforming={setIsTransforming}
+                        transformationConfig={transformationConfig}
                     />
                 </div>
 
