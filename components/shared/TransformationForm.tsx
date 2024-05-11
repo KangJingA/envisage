@@ -177,12 +177,12 @@ const TransformationForm = ({ action, data = null, userId, type, creditBalance, 
 
     }
 
-    useEffect(()=> {
+    useEffect(() => {
 
         if (image && type === 'restore' || type === 'removeBackground') {
             setNewTransformation(transformationType.config)
         }
-    },[image, transformationType.config, type])
+    }, [image, transformationType.config, type])
 
     return (
         <Form {...form}>
@@ -203,7 +203,10 @@ const TransformationForm = ({ action, data = null, userId, type, creditBalance, 
                         formLabel='aspectRatio'
                         className='w-full'
                         render={({ field }) => (
-                            <Select onValueChange={(value) => onSelectFieldHandler(value, field.onChange)}>
+                            <Select
+                                onValueChange={(value) => onSelectFieldHandler(value, field.onChange)}
+                                value={field.value}
+                            >
                                 <SelectTrigger className="select-field">
                                     <SelectValue placeholder="Select size" />
                                 </SelectTrigger>
